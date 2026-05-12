@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3rdUp – Genuine Impact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;0,800;0,900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #4147E0;
+    --blue-dark: #3540C8;
+    --mint: #2ED8A8;
+    --white: #ffffff;
+    --card-w: 220px;
+    --card-h: 340px;
+  }
+
+  body {
+    background: var(--blue);
+    font-family: 'Barlow', sans-serif;
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 56px;
+  }
+
+  .logo {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .logo span { color: var(--white); }
+
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 60px;
+    padding: 6px 8px;
+    list-style: none;
+    backdrop-filter: blur(8px);
+  }
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 40px;
+    transition: background 0.2s;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,0.2); }
+
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+
+  .btn-ghost {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.8);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.15); }
+
+  .btn-solid {
+    background: var(--white);
+    border: 2px solid var(--white);
+    color: var(--blue);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-solid:hover { background: rgba(255,255,255,0.9); }
+
+  /* ── HERO ── */
+  .hero {
+    display: flex;
+    align-items: center;
+    padding: 40px 56px 60px;
+    gap: 40px;
+    min-height: calc(100vh - 80px);
+  }
+
+  .hero-left {
+    flex: 0 0 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(72px, 9vw, 110px);
+    line-height: 0.92;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.85);
+    max-width: 420px;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--mint);
+    color: #0d2e25;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 16px 32px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(46,216,168,0.4);
+  }
+  .btn-cta .arrow { font-size: 20px; }
+
+  /* ── 3D SLIDER ── */
+  .hero-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+  }
+
+  .slider-scene {
+    perspective: 1000px;
+    width: 700px;
+    height: 420px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  .card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--card-w);
+    height: var(--card-h);
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: center center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    user-select: none;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  .card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card.active .card-overlay { opacity: 1; }
+
+  .card-buy-btn {
+    width: 100%;
+    background: var(--blue);
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+
+  /* Card positions – 5 cards, index 0..4, active = 2 */
+  /* pos-2 = center (active), pos-0 = far left, pos-4 = far right */
+  .card[data-pos="0"] {
+    transform: translate(-50%, -50%) translateX(-300px) translateZ(-180px) scale(0.68) rotateY(12deg);
+    z-index: 1;
+    filter: brightness(0.65);
+  }
+  .card[data-pos="1"] {
+    transform: translate(-50%, -50%) translateX(-190px) translateZ(-80px) scale(0.82) rotateY(7deg);
+    z-index: 2;
+    filter: brightness(0.78);
+  }
+  .card[data-pos="2"] {
+    transform: translate(-50%, -50%) translateX(0) translateZ(0) scale(1) rotateY(0deg);
+    z-index: 5;
+    filter: brightness(1);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  }
+  .card[data-pos="3"] {
+    transform: translate(-50%, -50%) translateX(190px) translateZ(-80px) scale(0.82) rotateY(-7deg);
+    z-index: 2;
+    filter: brightness(0.78);
+  }
+  .card[data-pos="4"] {
+    transform: translate(-50%, -50%) translateX(300px) translateZ(-180px) scale(0.68) rotateY(-12deg);
+    z-index: 1;
+    filter: brightness(0.65);
+  }
+
+  /* Gradient hints on far edges */
+  .slider-fade-left,
+  .slider-fade-right {
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .slider-fade-left {
+    left: 0;
+    background: linear-gradient(to right, var(--blue) 0%, transparent 100%);
+  }
+  .slider-fade-right {
+    right: 0;
+    background: linear-gradient(to left, var(--blue) 0%, transparent 100%);
+  }
+
+  /* Nav dots */
+  .slider-dots {
+    position: absolute;
+    bottom: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    padding: 0;
+  }
+  .dot.active {
+    background: var(--white);
+    width: 24px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="margin-right:6px">
+      <rect width="20" height="20" rx="5" fill="white" fill-opacity="0.25"/>
+      <text x="4" y="14" font-family="Barlow" font-weight="900" font-size="11" fill="white">3</text>
+    </svg>
+    3rd up
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Solutions</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Contact us</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-ghost">Login</button>
+    <button class="btn-solid">Start Now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-title">Genuine.<br>Impact.</h1>
+    <p class="hero-desc">
+      3rdUp connects seamlessly with the platforms you already use. From
+      ad networks like Adform, Google DV360, and Xandr, to app
+      integrations with Yinzcam, and embedding across any CMS.
+    </p>
+    <a href="#" class="btn-cta">
+      Get Started <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <div class="hero-right">
+    <div class="slider-scene">
+      <div class="slider-fade-left"></div>
+      <div class="slider-fade-right"></div>
+
+      <div class="card-track" id="cardTrack">
+
+        <!-- Card 0 -->
+        <div class="card" data-pos="0" data-index="0" onclick="rotateTo(0)">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=600&fit=crop" alt="Product 1">
+          <div class="card-overlay"><button class="card-buy-btn">Purchase Now</button></div>
+        </div>
+
+        <!-- Card 1 -->
+        <div class="card" data-pos="1" data-index="1" onclick="rotateTo(1)">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=600&fit=crop" alt="Product 2">
+          <div class="card-overlay"><button class="card-buy-btn">Purchase Now</button></div>
+        </div>
+
+        <!-- Card 2 – active center -->
+        <div class="card active" data-pos="2" data-index="2" onclick="rotateTo(2)">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=600&fit=crop" alt="Product 3">
+          <div class="card-overlay"><button class="card-buy-btn">Purchase Now</button></div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" data-pos="3" data-index="3" onclick="rotateTo(3)">
+          <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&h=600&fit=crop" alt="Product 4">
+          <div class="card-overlay"><button class="card-buy-btn">Purchase Now</button></div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card" data-pos="4" data-index="4" onclick="rotateTo(4)">
+          <img src="https://images.unsplash.com/photo-1581803118522-7b72a50f7e9f?w=400&h=600&fit=crop" alt="Product 5">
+          <div class="card-overlay"><button class="card-buy-btn">Purchase Now</button></div>
+        </div>
+      </div>
+
+      <!-- Dots -->
+      <div class="slider-dots" id="dots">
+        <button class="dot" onclick="rotateTo(0)"></button>
+        <button class="dot" onclick="rotateTo(1)"></button>
+        <button class="dot active" onclick="rotateTo(2)"></button>
+        <button class="dot" onclick="rotateTo(3)"></button>
+        <button class="dot active-target" onclick="rotateTo(4)"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // positions array: maps [cardIndex] -> visual slot (0=far-left … 4=far-right)
+  // initial state: card 2 is center (slot 2)
+  let positions = [0, 1, 2, 3, 4]; // positions[cardIndex] = slot
+  const CENTER = 2;
+  const TOTAL  = 5;
+
+  function rotateTo(clickedIndex) {
+    const currentCenter = positions.indexOf(CENTER);
+    if (clickedIndex === currentCenter) return;
+
+    const diff = clickedIndex - currentCenter;
+
+    // Shift all cards
+    const newPositions = positions.map((slot, i) => {
+      let next = slot - diff;
+      // wrap around
+      if (next < 0) next += TOTAL;
+      if (next >= TOTAL) next -= TOTAL;
+      return next;
+    });
+
+    positions = newPositions;
+    applyPositions();
+    updateDots();
+  }
+
+  function applyPositions() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, i) => {
+      card.setAttribute('data-pos', positions[i]);
+      card.classList.toggle('active', positions[i] === CENTER);
+    });
+  }
+
+  function updateDots() {
+    const activeCard = positions.indexOf(CENTER);
+    document.querySelectorAll('.dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === activeCard);
+    });
+  }
+
+  // Auto-advance
+  let autoTimer = setInterval(() => {
+    const currentCenter = positions.indexOf(CENTER);
+    const next = (currentCenter + 1) % TOTAL;
+    rotateTo(next);
+  }, 3000);
+
+  document.querySelector('.slider-scene').addEventListener('mouseenter', () => clearInterval(autoTimer));
+  document.querySelector('.slider-scene').addEventListener('mouseleave', () => {
+    autoTimer = setInterval(() => {
+      const currentCenter = positions.indexOf(CENTER);
+      rotateTo((currentCenter + 1) % TOTAL);
+    }, 3000);
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      const c = positions.indexOf(CENTER);
+      rotateTo((c - 1 + TOTAL) % TOTAL);
+    }
+    if (e.key === 'ArrowRight') {
+      const c = positions.indexOf(CENTER);
+      rotateTo((c + 1) % TOTAL);
+    }
+  });
+</script>
+</body>
+</html>
