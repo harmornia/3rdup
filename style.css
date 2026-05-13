@@ -105,7 +105,6 @@ nav {
 }
 
 .hero-title {
-  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
   font-size: clamp(72px, 9vw, 110px);
   line-height: 0.92;
