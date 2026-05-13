@@ -5,8 +5,8 @@
   --blue-dark: #3540C8;
   --mint: #2ED8A8;
   --white: #ffffff;
-  --card-w: 220px;
-  --card-h: 340px;
+  --card-w: 280px;
+  --card-h: 420px;
 }
 
 body {
@@ -39,13 +39,13 @@ nav {
 .logo span { color: var(--white); }
 
 .nav-links {
-  display: flex;
-  gap: 4px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 60px;
-  padding: 6px 8px;
-  list-style: none;
-  backdrop-filter: blur(8px);
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 12px 8px;
+    list-style: none;
+    backdrop-filter: blur(8px);
 }
 .nav-links a {
   color: var(--white);
